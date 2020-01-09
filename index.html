@@ -1,0 +1,34 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+    // websocket in javascript
+    var socket;
+    const socketMessageListener = (event) => {
+        console.log(event.data);
+    };
+    const socketOpenListener = (event) => {
+        console.log('Connected');
+        socket.send(JSON.stringify({ message: "hello, server" }))
+    };
+    const socketCloseListener = (event) => {
+        if (socket) {
+            console.log('Disconnected.');
+        }
+        var url = window.origin.replace("http", "ws") + '/ws';
+        socket = new WebSocket(url);
+        socket.addEventListener('open', socketOpenListener);
+        socket.addEventListener('message', socketMessageListener);
+        socket.addEventListener('close', socketCloseListener);
+    };
+
+    window.addEventListener('load', (event) => {
+        socketCloseListener();
+    });
+    </script>
+</body>
+
+</html>
