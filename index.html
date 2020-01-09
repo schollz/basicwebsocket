@@ -7,14 +7,14 @@
     <script>
     // websocket in javascript
     var socket;
-    const socketMessageListener = (event) => {
-        console.log(event.data);
+    const socketMessageListener = (e) => {
+        console.log(e.data);
     };
-    const socketOpenListener = (event) => {
+    const socketOpenListener = (e) => {
         console.log('Connected');
         socket.send(JSON.stringify({ message: "hello, server" }))
     };
-    const socketCloseListener = (event) => {
+    const socketCloseListener = (e) => {
         if (socket) {
             console.log('Disconnected.');
         }
@@ -24,7 +24,6 @@
         socket.addEventListener('message', socketMessageListener);
         socket.addEventListener('close', socketCloseListener);
     };
-
     window.addEventListener('load', (event) => {
         socketCloseListener();
     });

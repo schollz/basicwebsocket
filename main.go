@@ -8,8 +8,8 @@ import (
 	"time"
 
 	log "github.com/schollz/logger"
-	"nhooyr.io/websocket"
-	"nhooyr.io/websocket/wsjson"
+	"github.com/schollz/websocket"
+	"github.com/schollz/websocket/wsjson"
 )
 
 func main() {
