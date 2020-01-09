@@ -14,15 +14,19 @@
         console.log('Connected');
         socket.send(JSON.stringify({ message: "hello, server" }))
     };
+    const socketErrorListener = (e) => {
+        console.error(e);
+    }
     const socketCloseListener = (e) => {
         if (socket) {
             console.log('Disconnected.');
         }
         var url = window.origin.replace("http", "ws") + '/ws';
         socket = new WebSocket(url);
-        socket.addEventListener('open', socketOpenListener);
-        socket.addEventListener('message', socketMessageListener);
-        socket.addEventListener('close', socketCloseListener);
+        socket.onopen = socketOpenListener;
+        socket.onmessage = socketMessageListener;
+        socket.onclose = socketCloseListener;
+        socket.onerror = socketErrorListener;
     };
     window.addEventListener('load', (event) => {
         socketCloseListener();
