@@ -62,9 +62,7 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request) (err error) {
 			break
 		}
 		log.Debugf("received: %v", v)
-		err = wsjson.Write(ctx, c, struct {
-			Message string
-		}{
+		err = wsjson.Write(ctx, c, struct{ Message string }{
 			"hello, browser",
 		})
 		if err != nil {
@@ -74,7 +72,6 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request) (err error) {
 	if websocket.CloseStatus(err) == websocket.StatusGoingAway {
 		err = nil
 	}
-
 	c.Close(websocket.StatusNormalClosure, "")
 	return
 }
